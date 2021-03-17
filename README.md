@@ -16,7 +16,7 @@ Datasets:
 - [x] [CIFAR-10]
 - [x] [CIFAR-100]
 
-Synthetic noise type:
+Synthetic noise types:
 
 - [x] 'sym'  (Symmetric noisy labels)
 - [x] 'asym' (Asymmetric noisy labels)

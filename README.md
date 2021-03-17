@@ -1,4 +1,4 @@
-# LabNoise
+# Co-training-based_noisy-label-learning methods
 
 A unified framework for co-training-based noisy label learning methods.
 

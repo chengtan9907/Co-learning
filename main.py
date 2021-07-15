@@ -1,17 +1,21 @@
 import argparse
-from utils import load_config, get_log_name, set_seed, save_results, plot_results, get_test_acc
+from utils import load_config, get_log_name, set_seed, save_results, \
+                    plot_results, get_test_acc, print_config
 from datasets import cifar_dataloader
 import algorithms
 import numpy as np
-import torch
+import nni
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config', '-c', type=str, default=None,
+parser.add_argument('--config', '-c', type=str, default='./configs/standardCE.py',
                     help='The path of config file.')
 args = parser.parse_args()
 
 def main():
-    config = load_config(args.config, _print=True)
+    tuner_params = nni.get_next_parameter()
+    config = load_config(args.config, _print=False)
+    config.update(tuner_params)
+    print_config(config)
     set_seed(config['seed'])
     
     if config['algorithm'] == 'colearning':
@@ -41,6 +45,7 @@ def main():
         model.train(trainloader, epoch)
         # evaluate 
         test_acc = get_test_acc(model.evaluate(testloader))
+        nni.report_intermediate_result(test_acc)
         if best_acc < test_acc:
             best_acc, best_epoch = test_acc, epoch
 
@@ -53,6 +58,7 @@ def main():
 
     if config['save_result']:
         acc_np = np.array(acc_list)
+        nni.report_final_result(acc_np.mean())
         jsonfile = get_log_name(args.config, config)
         np.save(jsonfile.replace('.json', '.npy'), np.array(acc_all_list))
         save_results(config=config, last_ten=acc_np, best_acc=best_acc, best_epoch=best_epoch, jsonfile=jsonfile)

@@ -32,10 +32,12 @@ Synthetic noise types:
 
 # Reference
 
-[1] Han, B., Yao, Q., Yu, X., Niu, G., Xu, M., Hu, W., ... & Sugiyama, M. (2018, January). Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels. In 32nd Conference on Neural Information Processing Systems (NIPS). NEURAL INFORMATION PROCESSING SYSTEMS (NIPS).
+[1] Malach, Eran, et al. "Decoupling" when to update" from" how to update"." NeurIPS 2017.
 
-[2] Yu, X., Han, B., Yao, J., Niu, G., Tsang, I., & Sugiyama, M. (2019, May). How does disagreement help generalization against label corruption?. In International Conference on Machine Learning (pp. 7164-7173). PMLR.
+[2] Han, Bo, et al. "Co-teaching: Robust training of deep neural networks with extremely noisy labels." NeurIPS 2018.
 
-[3] Malach, E., & Shalev-Shwartz, S. (2017, January). Decoupling" when to update" from" how to update". In 31nd Conference on Neural Information Processing Systems (NIPS). NEURAL INFORMATION PROCESSING SYSTEMS (NIPS).
+[3] Yu, Xingrui, et al. "How does disagreement help generalization against label corruption?." ICML 2019.
 
-[4] Wei, H., Feng, L., Chen, X., & An, B. (2020). Combating noisy labels by agreement: A joint training method with co-regularization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 13726-13735).
+[4] Wei, Hongxin, et al. "Combating noisy labels by agreement: A joint training method with co-regularization." CVPR 2020.
+
+[5] Ma, Xingjun, et al. "Normalized loss functions for deep learning with noisy labels." ICML 2020.

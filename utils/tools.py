@@ -29,8 +29,10 @@ def print_config(config):
     print('---------------------------------')
 
 def get_log_name(path, config):
+    # log_name =  config['dataset'] + '_' + config['algorithm'] + '_' + config['noise_type'] + '_' + \
+    #             str(config['percent']) + '_seed' + str(config['seed']) + '.json'
     log_name =  config['dataset'] + '_' + config['algorithm'] + '_' + config['noise_type'] + '_' + \
-                 str(config['percent']) + '_seed' + str(config['seed']) + '.json'
+                 str(config['percent']) + '_distribution_' + config['distribution_t'] + '.json'
     if osp.exists('./log') is False:
         os.mkdir('./log')
     log_name = osp.join('./log', log_name)

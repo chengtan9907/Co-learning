@@ -5,6 +5,7 @@ from torch.autograd import Variable
 
 import numpy as np
 from utils import get_model
+from losses import SCELoss, GCELoss, DMILoss
 from tqdm import tqdm
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
@@ -36,6 +37,16 @@ class StandardCE:
         self.model_scratch = get_model(config['model1_type'], input_channel, num_classes, device)
         self.optimizer = torch.optim.Adam(self.model_scratch.parameters(), lr=self.lr)
         self.adjust_lr = config['adjust_lr']
+
+        # loss function
+        if config['loss_type'] == 'ce':
+            self.criterion = nn.CrossEntropyLoss()
+        elif config['loss_type'] == 'sce':
+            self.criterion = SCELoss(dataset=config['dataset'], num_classes=num_classes)
+        elif config['loss_type'] == 'gce':
+            self.criterion = GCELoss(num_classes=num_classes)
+        elif config['loss_type'] == 'dmi':
+            self.criterion = DMILoss(num_classes=num_classes)
 
     def evaluate(self, test_loader):
         print('Evaluating ...')
@@ -69,8 +80,9 @@ class StandardCE:
             labels = Variable(labels).to(self.device)
 
             logits = self.model_scratch(x)
-            loss_sup = F.cross_entropy(logits, labels)
-            
+            # loss_sup = F.cross_entropy(logits, labels)
+            loss_sup = self.criterion(logits, labels)
+
             self.optimizer.zero_grad()
             loss_sup.backward()
             self.optimizer.step()

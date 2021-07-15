@@ -1,3 +1,4 @@
+import scipy
 import torch 
 import torch.nn as nn
 import numpy as np
@@ -25,10 +26,14 @@ def Distance_squared(x, y, featdim=1):
     d[torch.eye(d.shape[0]) == 1] = eps
     return d
 
-def CalPt_norm(dist):
+def CalPairwise(dist):
     dist[dist < 0] = 0
     Pij = torch.exp(-dist)
     return Pij
+
+def CalPairwise_t(dist, v):
+    C = scipy.special.gamma((v + 1) / 2) / (np.sqrt(v * np.pi) * scipy.special.gamma(v / 2))
+    return torch.pow((1 + torch.pow(dist, 2) / v), - (v + 1) / 2)
 
 def CE(P, Q):
     loss = -1 * (P * torch.log(Q + eps)).mean()

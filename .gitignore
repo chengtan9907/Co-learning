@@ -118,3 +118,5 @@ autotrain.py
 *.out
 sigma_rho/
 *.pth
+*.json
+*.yml

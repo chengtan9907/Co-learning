@@ -11,6 +11,9 @@ device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 
 from losses import loss_structrue, NTXentLoss
 
+# REBUTTAL
+from losses import loss_structrue_t
+
 # def D(self, p, z):
 #         p = F.normalize(p, p=2, dim=1)
 #         z = F.normalize(z, p=2, dim=1)
@@ -47,7 +50,10 @@ class Colearning:
         self.optimizer2 = torch.optim.Adam(list(self.model_scratch.fc.parameters()), lr=self.lr // 5)
         self.adjust_lr = config['adjust_lr']
         self.ntxent = NTXentLoss(self.device, self.batch_size, temperature=0.5, use_cosine_similarity=True)
-        
+        self.param_v = None
+        if 'distribution_t' in config.keys():
+            self.param_v = config['distribution_t']
+
     def mixup_data(self, x, y, alpha=5.0):
         lam = Beta(torch.tensor(alpha), torch.tensor(alpha)).sample() if alpha > 0 else 1
         index = torch.randperm(x.size()[0]).cuda() 
@@ -93,7 +99,10 @@ class Colearning:
             raw = Variable(raw).to(self.device, non_blocking=True)
 
             feat, outs, logits = self.model_scratch(raw)
-            loss_feat = loss_structrue(outs.detach(), logits)
+            if self.param_v is None:
+                loss_feat = loss_structrue(outs.detach(), logits)
+            else:
+                loss_feat = loss_structrue_t(outs.detach(), logits, self.param_v)
             self.optimizer2.zero_grad()
             loss_feat.backward()
             self.optimizer2.step()
@@ -118,7 +127,7 @@ class Colearning:
             self.optimizer1.step()
 
             pbar.set_description(
-                    'Epoch [%d/%d], Loss_con: %.4f, loss_sup: %.4f'
+                    'Epoch [%d/%d], loss_con: %.4f, loss_sup: %.4f'
                     % (epoch + 1, self.epochs, loss_con.data.item(), loss_sup.data.item()))
 
 

@@ -7,6 +7,7 @@ root = './data'
 noise_type = 'sym'
 percent = 0.2
 seed = 1
+loss_type = 'sce'
 # model param
 model1_type = 'resnet18'
 model2_type = 'none'

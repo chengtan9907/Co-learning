@@ -1,43 +1,57 @@
 # Co-training-based_noisy-label-learning methods
 
-A unified framework for co-training-based noisy label learning methods.
+This repository contains a unified framework for co-training-based noisy label learning methods. 
+
+The official implementation of the paper **Co-learning: Learning from noisy labels with self-supervision** is also included.
+
+<p align="center">
+    <img src="figs/architectures.png" width="900"> <br>
+</p>
 
 # Introduction
 
-Algorithms:
+<details open>
+<summary>Supported algorithms</summary>
 
-- [x] [Decoupling](algorithms/Decoupling.py)
-- [x] [Co-teaching](algorithms/Coteaching.py)
-- [x] [Co-teaching+](algorithms/Coteachingplus.py)
-- [x] [JoCoR](algorithms/JoCoR.py)
+- [x] [Decoupling (NeurIPS'2017)](algorithms/Decoupling.py)
+- [x] [Co-teaching (NeurIPS'2018)](algorithms/Coteaching.py)
+- [x] [Co-teaching+ (ICML'2019)](algorithms/Coteachingplus.py)
+- [x] [JoCoR (CVPR'2020)](algorithms/JoCoR.py)
+</details>
 
-Datasets:
+<details open>
+<summary>Supported datasets:</summary>
 
-- [x] [CIFAR-10]
-- [x] [CIFAR-100]
+- [x] CIFAR-10
+- [x] CIFAR-100
+</details>
 
-Synthetic noise types:
+<details open>
+<summary>Supported synthetic noise types:</summary>
 
 - [x] 'sym'  (Symmetric noisy labels)
 - [x] 'asym' (Asymmetric noisy labels)
 - [x] 'ins'  (Instance-dependent noisy labels)
+</details>
 
 # Dependency
 
-1. numpy
-2. torch, torchvision
-3. scipy
-4. addict
-5. matplotlib
+* numpy
+* torch, torchvision
+* scipy
+* addict
+* matplotlib
 
-# Reference
+# Citation
 
-[1] Malach, Eran, et al. "Decoupling" when to update" from" how to update"." NeurIPS 2017.
+If you are interested in our repository and our paper, please cite the following paper:
 
-[2] Han, Bo, et al. "Co-teaching: Robust training of deep neural networks with extremely noisy labels." NeurIPS 2018.
-
-[3] Yu, Xingrui, et al. "How does disagreement help generalization against label corruption?." ICML 2019.
-
-[4] Wei, Hongxin, et al. "Combating noisy labels by agreement: A joint training method with co-regularization." CVPR 2020.
-
-[5] Ma, Xingjun, et al. "Normalized loss functions for deep learning with noisy labels." ICML 2020.
+```
+@inproceedings{tan2021co,
+  title={Co-learning: Learning from noisy labels with self-supervision},
+  author={Tan, Cheng and Xia, Jun and Wu, Lirong and Li, Stan Z},
+  booktitle={Proceedings of the 29th ACM International Conference on Multimedia},
+  pages={1405--1413},
+  year={2021}
+}
+```

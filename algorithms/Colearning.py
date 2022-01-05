@@ -47,7 +47,7 @@ class Colearning:
         self.model_scratch = Model_r18(feature_dim=config['feature_dim'], is_linear=True, num_classes=num_classes).to(device)
 
         self.optimizer1 = torch.optim.Adam(self.model_scratch.parameters(), lr=self.lr)
-        self.optimizer2 = torch.optim.Adam(list(self.model_scratch.fc.parameters()), lr=self.lr // 5)
+        self.optimizer2 = torch.optim.Adam(list(self.model_scratch.fc.parameters()), lr=self.lr / 5)
         self.adjust_lr = config['adjust_lr']
         self.ntxent = NTXentLoss(self.device, self.batch_size, temperature=0.5, use_cosine_similarity=True)
         self.param_v = None

@@ -17,6 +17,7 @@ The official implementation of the paper **Co-learning: Learning from noisy labe
 - [x] [Co-teaching (NeurIPS'2018)](algorithms/Coteaching.py)
 - [x] [Co-teaching+ (ICML'2019)](algorithms/Coteachingplus.py)
 - [x] [JoCoR (CVPR'2020)](algorithms/JoCoR.py)
+- [x] [Co-learning (MM'2021)](algorithms/Colearning.py)
 </details>
 
 <details open>

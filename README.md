@@ -1,4 +1,4 @@
-# Co-training-based_noisy-label-learning methods
+# Co-learning: Learning from noisy labels with self-supervision
 
 This repository contains a unified framework for co-training-based noisy label learning methods. 
 
